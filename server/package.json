@@ -1,0 +1,11 @@
+{
+  "name": "gifbucket-server",
+  "description": "Fetch an image from remote source (URL) and then upload the image to a S3 bucket.",
+  "version": "1.0.0",
+  "author": "Josh McArthur",
+  "license": "MIT",
+  "dependencies": {
+    "aws-sdk": "^2.7.9",
+    "node-fetch": "^1.6.3"
+  }
+}
