@@ -1,15 +1,15 @@
-service: fetch-file-and-store-in-s3
+service: gifbucket-server
 
 frameworkVersion: ">=1.1.0"
 
 custom:
-  bucket: <your-bucket-name>
+  bucket: gifbucket-sudojosh
 
 provider:
   name: aws
   runtime: nodejs8.10
-  stage: dev
-  region: us-west-1
+  stage: live
+  region: ap-southeast-2
   iamRoleStatements:
     - Effect: Allow
       Action:
@@ -19,6 +19,23 @@ provider:
 
 functions:
   save:
-    handler: handler.save
+    handler: handler.http
+    events:
+      - http:
+          method: post
+          path: "gifs/create"
+          cors: 
+            origins:
+              - "http://localhost:3000"
+              - "https://gif.joshmcarthur.com"
+            headers:
+              - "X-Api-Key"
+              - "Content-Type"
+              - "Accept"
+            allowCredentials: false
+          request:
+            parameters:
+              querystrings:
+                url: true
     environment:
       BUCKET: ${self:custom.bucket}

@@ -6,6 +6,7 @@
   "license": "MIT",
   "dependencies": {
     "aws-sdk": "^2.7.9",
+    "file-type": "^11.0.0",
     "node-fetch": "^1.6.3"
   }
 }
