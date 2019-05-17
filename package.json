@@ -1,5 +1,6 @@
 {
   "name": "gifbucket",
+  "homepage": "https://img.joshmcarthur.com",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -11,6 +12,8 @@
     "workbox-build": "^4.3.1"
   },
   "scripts": {
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d build",
     "build-sw": "node ./src/sw-build.js",
     "start": "react-scripts start",
     "clean-cra-sw": "rm -rf build/precache-manifest.*.js && rm -f build/service-worker.js",
