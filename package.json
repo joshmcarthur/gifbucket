@@ -3,12 +3,6 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@uppy/aws-s3": "^1.0.1",
-    "@uppy/aws-s3-multipart": "^1.0.1",
-    "@uppy/core": "^1.0.1",
-    "@uppy/react": "^1.0.1",
-    "@uppy/url": "^1.0.1",
-    "aws-sdk": "^2.454.0",
     "react": "^16.8.6",
     "react-dom": "^16.8.6",
     "react-router-dom": "^5.0.0",
