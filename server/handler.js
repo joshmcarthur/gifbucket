@@ -11,6 +11,15 @@ const hashCode = function (str) {
   return hash;
 };
 
+const buildResponse = (statusCode, payload) => (
+  {
+    statusCode: statusCode,
+    isBase64Encoded: false,
+    headers: { 'Access-Control-Allow-Origin': '*' },
+    body: JSON.stringify(payload)
+  }
+);
+
 const fetch = require('node-fetch');
 const AWS = require('aws-sdk'); // eslint-disable-line import/no-extraneous-dependencies
 const fileType = require("file-type");
@@ -18,30 +27,11 @@ const fileType = require("file-type");
 const s3 = new AWS.S3();
 
 module.exports.http = (event, _context, callback) => {
-  if (!event.queryStringParameters) return callback(null, {
-    statusCode: 406,
-    isBase64Encoded: false,
-    headers: {},
-    body: JSON.stringify({ message: "Missing URL to download" })
-  });
+  if (!event.queryStringParameters) return callback(null, buildResponse(406, { message: "Missing URL to download." }));
 
   module.exports.save(event.queryStringParameters.url)
-    .then(() =>
-      callback(null, {
-        statusCode: 202,
-        isBase64Encoded: false,
-        headers: {},
-        body: JSON.stringify({ success: true })
-      })
-    )
-    .catch(err => (
-      callback(null, {
-        statusCode: 406,
-        isBase64Encoded: false,
-        headers: {},
-        body: JSON.stringify({ message: err.message })
-      })
-    ));
+    .then(() => callback(null, buildResponse(202, { success: true })))
+    .catch(err => callback(null, buildResponse(406, { message: err.message })));
 }
 
 module.exports.save = (image_url) => {
