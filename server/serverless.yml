@@ -25,9 +25,8 @@ functions:
           method: post
           path: "gifs/create"
           cors: 
-            origins:
-              - "http://localhost:3000"
-              - "https://gif.joshmcarthur.com"
+            # TODO: Use stages to support multiple origins
+            origin: "https://img.joshmcarthur.com"
             headers:
               - "X-Api-Key"
               - "Content-Type"
