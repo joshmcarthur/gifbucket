@@ -2,9 +2,9 @@ import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
 import "./App.css";
 
-const UPLOAD_URL = new URL("https://85jb2c1q5e.execute-api.ap-southeast-2.amazonaws.com/live/gifs/create");
-const BUCKET_NAME = "gifbucket-sudojosh";
-const AWS_REGION = "ap-southeast-2";
+const UPLOAD_URL = new URL(process.env.REACT_APP_API_ENDPOINT + "/gifs/create");
+const BUCKET_NAME = process.env.REACT_APP_S3_BUCKET_NAME;
+const AWS_REGION = process.env.REACT_APP_S3_REGION;
 
 const bucketUrl = () => `https://${BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com`;
 const publicObjectUrl = (key) => `${bucketUrl()}/${key}`;

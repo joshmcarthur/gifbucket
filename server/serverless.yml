@@ -3,13 +3,13 @@ service: gifbucket-server
 frameworkVersion: ">=1.1.0"
 
 custom:
-  bucket: gifbucket-sudojosh
+  bucket: ${env:REACT_APP_S3_BUCKET}
 
 provider:
   name: aws
   runtime: nodejs8.10
   stage: live
-  region: ap-southeast-2
+  region: ${env:REACT_APP_S3_REGION}
   iamRoleStatements:
     - Effect: Allow
       Action:
