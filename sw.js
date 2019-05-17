@@ -9,6 +9,10 @@ if ('function' === typeof importScripts) {
     /* injection point for manifest files.  */
     workbox.precaching.precacheAndRoute([
   {
+    "url": "404.html",
+    "revision": "12a3983c9a553685a6753b7ccfd7b63d"
+  },
+  {
     "url": "icons/icon-128x128.png",
     "revision": "7db059b7dd21ee7a923ffa9df09864d8"
   },
@@ -42,7 +46,7 @@ if ('function' === typeof importScripts) {
   },
   {
     "url": "index.html",
-    "revision": "052504791fda829e73cdc6ee61064e41"
+    "revision": "8c1076e03f277ed48560ce620fdd02e2"
   },
   {
     "url": "static/css/main.494adcef.chunk.css",
