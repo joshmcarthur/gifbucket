@@ -1,5 +1,6 @@
 import React from "react";
 import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import "./App.css";
 
 const UPLOAD_URL = new URL("https://85jb2c1q5e.execute-api.ap-southeast-2.amazonaws.com/live/gifs/create");
 const BUCKET_NAME = "gifbucket-sudojosh";
@@ -31,7 +32,7 @@ class Index extends React.Component {
     const { isLoading, items } = this.state;
     if (isLoading) return <p>Loading...</p>;
     return (
-      <ul>
+      <ul className="ItemList">
         {items.map(item => <li key={item.key}><img src={publicObjectUrl(item.key)} alt={item.key} /></li>)}
       </ul>
     );
@@ -48,6 +49,7 @@ class ShareTarget extends React.Component {
 
   requestUpload(evt) {
     evt.preventDefault();
+    this.setState({ isLoading: true });
     UPLOAD_URL.searchParams.append("url", this.state.url);
     fetch(UPLOAD_URL, { method: "POST", headers: { "X-Api-Key": "test" } })
       .then(() => this.props.history.push("/"), alert);
@@ -56,25 +58,20 @@ class ShareTarget extends React.Component {
   render() {
     return <div className="ShareTarget">
       <img src={this.state.url} alt={this.state.url} />
-      <button onClick={this.requestUpload}>Add to Bucket</button>
+      <button className="UploadButton" onClick={this.requestUpload} disabled={this.state.isLoading}>
+        {this.state.isLoading ? "Bucketing..." : "Add to Bucket"}</button>
+      <Link className="CancelLink" to="/">Cancel</Link>
     </div>
   }
 }
 function AppRouter() {
   return (
     <Router>
-      <div>
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-          </ul>
-        </nav>
-
-        <Route path="/" exact component={Index} />
-        <Route path="/share-target/" component={ShareTarget} />
-      </div>
+      <header className="Header">
+        <h1 className="Header--Title">GIFBucket</h1>
+      </header>
+      <Route path="/" exact component={Index} />
+      <Route path="/share-target/" component={ShareTarget} />
     </Router>
   );
 }

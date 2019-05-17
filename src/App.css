@@ -1,33 +1,89 @@
-.App {
-  text-align: center;
+@import url('https://fonts.googleapis.com/css?family=Baloo+Bhai&display=swap');
+
+body, html, #root {
+  background: rgba(30,30,30,0.9);
+  margin: 0;
+  padding: 0;
+  min-width: 100vw;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+.Header {
+  min-width: 100vw;
+  padding: 0.35rem 1rem 0.1rem;
+  box-sizing: border-box;
+  background-color: #6912c7;
+  border-bottom: solid .25rem #6912c7;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='80' height='80' viewBox='0 0 80 80'%3E%3Cg fill='%239C92AC' fill-opacity='0.39'%3E%3Cpath fill-rule='evenodd' d='M11 0l5 20H6l5-20zm42 31a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM0 72h40v4H0v-4zm0-8h31v4H0v-4zm20-16h20v4H20v-4zM0 56h40v4H0v-4zm63-25a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM53 41a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-30 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm-28-8a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zM56 5a5 5 0 0 0-10 0h10zm10 0a5 5 0 0 1-10 0h10zm-3 46a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm10 0a3 3 0 1 0 0-6 3 3 0 0 0 0 6zM21 0l5 20H16l5-20zm43 64v-4h-4v4h-4v4h4v4h4v-4h4v-4h-4zM36 13h4v4h-4v-4zm4 4h4v4h-4v-4zm-4 4h4v4h-4v-4zm8-8h4v4h-4v-4z'/%3E%3C/g%3E%3C/svg%3E");
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 40vmin;
+.Header--Title {
+  margin: 0;
+  padding: 0;
+  line-height: 1;
+  color: #fff;
+  font-family: 'Baloo Bhai', sans-serif; 
+  font-weight: normal;
+}
+
+.ItemList {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    grid-gap: 1rem;
+    list-style-type: none;
+    margin: 1rem 1rem;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+@media all and (max-width: 640px) {
+  .ItemList {
+    grid-template-columns: repeat(1, 1fr);
+  }
+}
+
+.UploadButton {
+  background: rgba(242,68,76,0.8);
+  appearance: none;
+  border: 0;
+  font-size: 1.25rem;
+  padding: 1rem;
+  color: rgba(255, 255, 255, 0.88);
+  font-weight: 400;
+  width: 640px;
+  margin: auto;
+  display: block;
+  max-width: 100%;
+  transition: all 0.25s ease-in-out;
+}
+
+.UploadButton:hover {
+  background: rgba(242,68,76,1);
+}
+
+.UploadButton[disabled] {
+  opacity: 0.8;
   pointer-events: none;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+img {
+  max-width: 100%;
+  height: auto;
+  margin: auto;
+  display: block;
 }
 
-.App-link {
-  color: #61dafb;
+.CancelLink {
+text-align: center;
+color: #F2444C;
+width: 100%;
+display: block;
+margin: 1rem auto;
+text-decoration: none;
+opacity: 0.75;
+transition: opacity 0.2s ease-in-out;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.CancelLink:hover {
+  opacity: 1;
 }
