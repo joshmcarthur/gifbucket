@@ -42,7 +42,7 @@ if ('function' === typeof importScripts) {
   },
   {
     "url": "index.html",
-    "revision": "443d1fbd46f8e6c441c491cc1ad8ec71"
+    "revision": "052504791fda829e73cdc6ee61064e41"
   },
   {
     "url": "static/css/main.494adcef.chunk.css",
