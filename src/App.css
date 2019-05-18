@@ -36,6 +36,10 @@ body, html, #root {
     box-sizing: border-box;
 }
 
+.Item {
+  position: relative;
+}
+
 @media all and (max-width: 640px) {
   .ItemList {
     grid-template-columns: repeat(1, 1fr);
@@ -85,6 +89,33 @@ opacity: 0.75;
 transition: opacity 0.2s ease-in-out;
 }
 
+.Share {
+  display: none;
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  align-content: center;
+
+  background: rgba(0, 0, 0, 0.75);
+}
+
+.Share button {
+  border: solid 0.15rem #FE8B71;
+  color: #FE8B71;
+  appearance: none;
+  background: transparent;
+  align-self: center;
+  margin: auto;
+  padding: 0.25rem 2rem;
+  font-size: 100%;
+}
+
 .CancelLink:hover {
   opacity: 1;
+}
+
+.Item.active .Share {
+  display: flex;
 }

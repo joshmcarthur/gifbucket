@@ -12,6 +12,10 @@ const publicObjectUrl = (key) => `${bucketUrl()}/${key}`;
 
 class Index extends React.Component {
   state = { isLoading: true, items: [] }
+  constructor(props) {
+    super(props);
+    this.setActive = this.setActive.bind(this);
+  }
   componentDidMount() {
     fetch(bucketUrl())
       .then(r => r.text())
@@ -21,19 +25,37 @@ class Index extends React.Component {
         elements.map(content => (
           Array.from(content.children).reduce(
             (acc, child) => {
-              acc[child.tagName.toLowerCase()] = child.textContent; return acc;
+              acc[child.tagName.toLowerCase()] = child.textContent;
+              return acc;
             }, {}
           )
         ))
       ))
       .then(contents => this.setState({ items: contents, isLoading: false }));
   }
+  setActive(evt) {
+    evt.preventDefault();
+
+  }
   render() {
     const { isLoading, items } = this.state;
     if (isLoading) return <p>Loading...</p>;
     return (
       <ul className="ItemList">
-        {items.map(item => <li key={item.key}><img src={publicObjectUrl(item.key)} alt={item.key} /></li>)}
+        {items.map(item => (
+          <li
+            className={`Item ${this.state.active === item.key ? 'active' : ''}`}
+            key={item.key}
+            onClick={e => { e.preventDefault(); this.setState({ active: item.key }) }}
+          >
+            <img src={publicObjectUrl(item.key)} alt={item.key} />
+            <div className="Share">
+              <button
+                onClick={(evt) => { if (!navigator.share) return; evt.preventDefault(); navigator.share({ url: publicObjectUrl(item.key) }) }}
+              >Share</button>
+            </div>
+          </li>
+        ))}
       </ul>
     );
   }
