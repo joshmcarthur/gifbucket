@@ -46,11 +46,11 @@ if ('function' === typeof importScripts) {
   },
   {
     "url": "index.html",
-    "revision": "fbde9f3e164740f6869a19a94edafa5d"
+    "revision": "22e1af9054669124475cdcc73d337ee0"
   },
   {
-    "url": "static/css/main.494adcef.chunk.css",
-    "revision": "4ef2e8b71d02cf71c77dd1e81854b598"
+    "url": "static/css/main.278c91f4.chunk.css",
+    "revision": "2de8ae546ab7b0f2bcb2d06f5a0810f3"
   },
   {
     "url": "static/js/2.f919e3b8.chunk.js",

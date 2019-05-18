@@ -1,6 +1,7 @@
 {
   "short_name": "GIFBucket",
-  "name": "Self-hosted private gif bucket",
+  "name": "GIFBucket",
+  "description": "Self-hosted private gif bucket",
   "icons": [
     {
       "src": "/icons/icon-72x72.png",
