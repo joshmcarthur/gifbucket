@@ -71,6 +71,7 @@ img {
   height: auto;
   margin: auto;
   display: block;
+  border-radius: 0.5rem;
 }
 
 .CancelLink {
