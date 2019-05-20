@@ -28,8 +28,15 @@ const s3 = new AWS.S3();
 
 module.exports.http = (event, _context, callback) => {
   if (!event.queryStringParameters) return callback(null, buildResponse(406, { message: "Missing URL to download." }));
+  let url = event.queryStringParameters.url;
 
-  module.exports.save(event.queryStringParameters.url)
+  // v.redd.it links do not resolve to a video file
+  // on their own. This fallback _generally_ works. A more 
+  // solid implementation would be to query the DASHPlayList.mpd
+  // to get the list of media.
+  if (url.lastIndexOf("https://v.redd.it/", 0) === 0) url += "/DASH_720";
+
+  module.exports.save(url)
     .then(() => callback(null, buildResponse(202, { success: true })))
     .catch(err => callback(null, buildResponse(406, { message: err.message })));
 }
