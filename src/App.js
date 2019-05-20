@@ -7,7 +7,28 @@ const BUCKET_NAME = process.env.REACT_APP_S3_BUCKET_NAME;
 const AWS_REGION = process.env.REACT_APP_S3_REGION;
 
 const bucketUrl = () => `https://${BUCKET_NAME}.s3.${AWS_REGION}.amazonaws.com`;
-const publicObjectUrl = (key) => `${bucketUrl()}/${key}`;
+
+const Item = ({ item, isActive, onClick }) => {
+  const publicUrl = `${bucketUrl()}/${item.key}`;
+  // Gross, but we don't get the content-type back from AWS
+  const mediaElement = publicUrl.endsWith(".mp4") ?
+    <video autoPlay muted loop src={publicUrl} />
+    :
+    <img src={publicUrl} alt={item.key} />;
+  return (
+    <li
+      className={`Item ${isActive ? 'active' : ''}`}
+      onClick={onClick}
+    >
+      {mediaElement}
+      <div className="Share">
+        <button
+          onClick={(evt) => { if (!navigator.share) return; evt.preventDefault(); navigator.share({ url: publicUrl }) }}
+        >Share</button>
+      </div>
+    </li >
+  );
+}
 
 
 class Index extends React.Component {
@@ -38,23 +59,19 @@ class Index extends React.Component {
 
   }
   render() {
-    const { isLoading, items } = this.state;
+    const { isLoading, items, active } = this.state;
     if (isLoading) return <p>Loading...</p>;
     return (
       <ul className="ItemList">
         {items.map(item => (
-          <li
-            className={`Item ${this.state.active === item.key ? 'active' : ''}`}
+          <Item
+            item={item}
             key={item.key}
-            onClick={e => { e.preventDefault(); this.setState({ active: item.key }) }}
-          >
-            <img src={publicObjectUrl(item.key)} alt={item.key} />
-            <div className="Share">
-              <button
-                onClick={(evt) => { if (!navigator.share) return; evt.preventDefault(); navigator.share({ url: publicObjectUrl(item.key) }) }}
-              >Share</button>
-            </div>
-          </li>
+            isActive={active === item.key}
+            onClick={e => {
+              e.preventDefault();
+              this.setState({ active: active === item.key ? null : item.key })
+            }} />
         ))}
       </ul>
     );
